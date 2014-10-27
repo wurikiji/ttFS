@@ -9,5 +9,5 @@ Time Table File System based on Ext4 File system.
 Use patch -p0 < "patch file" 
 
 Team: VLDB 
-Member: Gihwan Oh, Jongbaek Lee 
-Contacts: {wurikiji,hundredbag} At gmail Dot com
+<br>Member: @wurikiji, @hundredbag 
+<br>Contacts: {wurikiji,hundredbag} At gmail Dot com
