@@ -1,8 +1,8 @@
 # Time Table File System(ttFS) Overview
 
 - [Overview](#overview)
-- [Key Concepts](#Key-Concepts)
-- [ttFS functionalities](#Functions)
+- [Key Concepts](#key-concepts)
+- [ttFS functionalities](#functions)
 
 
 ##Overview
