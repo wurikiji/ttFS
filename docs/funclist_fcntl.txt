@@ -1,24 +1,18 @@
 static int setfl(int fd, struct file * filp, unsigned long arg)
 static void f_modown(struct file *filp, struct pid *pid, enum pid_type type, int force)
-
 int __f_setown(struct file *filp, struct pid *pid, enum pid_type type, int force)
 int f_setown(struct file *filp, unsigned long arg, int force)
 pid_t f_getown(struct file *filp)oid f_delown(struct file *filp)
 static int f_setown_ex(struct file *filp, unsigned long arg)
 static int f_getown_ex(struct file *filp, unsigned long arg)
 static int f_getowner_uids(struct file *filp, unsigned long arg)
-static long do_fcntl(int fd, unsigned int cmd, unsigned long arg,
-		struct file *filp)
+static long do_fcntl(int fd, unsigned int cmd, unsigned long arg, struct file *filp)
 static int check_fcntl_cmd(unsigned cmd)
 SYSCALL_DEFINE3(fcntl, unsigned int, fd, unsigned int, cmd, unsigned long, arg)
-static inline int sigio_perm(struct task_struct *p,
-                             struct fown_struct *fown, int sig)
-static void send_sigio_to_task(struct task_struct *p,
-			       struct fown_struct *fown,
-			       int fd, int reason, int group)
+static inline int sigio_perm(struct task_struct *p, struct fown_struct *fown, int sig)
+static void send_sigio_to_task(struct task_struct *p, struct fown_struct *fown, int fd, int reason, int group)
 void send_sigio(struct fown_struct *fown, int fd, int band)
-static void send_sigurg_to_task(struct task_struct *p,
-				struct fown_struct *fown, int group)
+static void send_sigurg_to_task(struct task_struct *p, struct fown_struct *fown, int group)
 int send_sigurg(struct fown_struct *fown)
 static void fasync_free_rcu(struct rcu_head *head)
 int fasync_remove_entry(struct file *filp, struct fasync_struct **fapp)
