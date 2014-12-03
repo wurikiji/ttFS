@@ -440,7 +440,7 @@ static int pn544_hci_i2c_parse_dt(struct i2c_client *client,
 	return 0;
 }
 #else
-static static pn544_hci_i2c_parse_dt(struct i2c_client *client,
+static int pn544_hci_i2c_parse_dt(struct i2c_client *client,
 		struct pn544_i2c_phy *phy)
 {
 	return -EINVAL;
