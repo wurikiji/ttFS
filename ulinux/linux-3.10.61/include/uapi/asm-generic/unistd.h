@@ -693,8 +693,11 @@ __SYSCALL(__NR_kcmp, sys_kcmp)
 #define __NR_finit_module 273
 __SYSCALL(__NR_finit_module, sys_finit_module)
 
+#define __NR_ogh_test 274
+__SYSCALL(__NR_ogh_test, sys_ogh_test)
+
 #undef __NR_syscalls
-#define __NR_syscalls 274
+#define __NR_syscalls 275
 
 /*
  * All syscalls below here should go away really,
@@ -902,3 +905,4 @@ __SYSCALL(__NR_fork, sys_ni_syscall)
 #define __NR_lstat64 __NR3264_lstat
 #endif
 #endif
+

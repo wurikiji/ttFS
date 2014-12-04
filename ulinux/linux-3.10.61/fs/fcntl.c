@@ -129,6 +129,7 @@ int f_setown(struct file *filp, unsigned long arg, int force)
 	rcu_read_unlock();
 	return result;
 }
+
 EXPORT_SYMBOL(f_setown);
 
 void f_delown(struct file *filp)

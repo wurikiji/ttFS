@@ -3,4 +3,5 @@
 *.ko
 ctags
 cscope.out
+tags
 

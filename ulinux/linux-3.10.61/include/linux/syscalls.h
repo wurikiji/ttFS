@@ -490,6 +490,7 @@ asmlinkage long sys_readlink(const char __user *path,
 asmlinkage long sys_creat(const char __user *pathname, umode_t mode);
 asmlinkage long sys_open(const char __user *filename,
 				int flags, umode_t mode);
+
 asmlinkage long sys_close(unsigned int fd);
 asmlinkage long sys_access(const char __user *filename, int mode);
 asmlinkage long sys_vhangup(void);
@@ -847,3 +848,6 @@ asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type,
 			 unsigned long idx1, unsigned long idx2);
 asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
 #endif
+
+/* ogh_test */
+asmlinkage long ogh_test(void);

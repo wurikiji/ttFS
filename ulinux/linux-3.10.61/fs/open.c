@@ -1058,3 +1058,9 @@ int nonseekable_open(struct inode *inode, struct file *filp)
 }
 
 EXPORT_SYMBOL(nonseekable_open);
+
+SYSCALL_DEFINE0(ogh_test)
+{
+		printk("OGH TEST IS GOOD\n");
+		return 10;
+}
