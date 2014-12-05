@@ -4,4 +4,4 @@
 ctags
 cscope.out
 tags
-
+*.diff
