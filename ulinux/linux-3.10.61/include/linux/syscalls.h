@@ -851,6 +851,6 @@ asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
 /* ogh_test */
 asmlinkage long sys_ogh_test(void);
 asmlinkage long sys_set_timetable(struct timetable * tt, int num);
-asmlinkage long sys_check_timetable(void);
+asmlinkage long sys_check_timetable(struct timetable* tt, int* retval);
 #endif
 

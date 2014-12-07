@@ -3,7 +3,7 @@
  *
  *  Copyright (C) 1991, 1992  Linus Torvalds
  */
-
+#include <linux/string.h>
 #include <linux/slab.h> 
 #include <linux/stat.h>
 #include <linux/fcntl.h>
@@ -19,6 +19,7 @@
 #include <linux/compat.h>
 #include "internal.h"
 
+#include "../include/linux/ogh.h"
 #include <asm/uaccess.h>
 #include <asm/unistd.h>
 
@@ -469,12 +470,42 @@ static inline void file_pos_write(struct file *file, loff_t pos)
 	file->f_pos = pos;
 }
 
+extern long check_timetable(struct timetable *, int *);
+
 SYSCALL_DEFINE3(read, unsigned int, fd, char __user *, buf, size_t, count)
 {
 	struct fd f = fdget(fd);
 	ssize_t ret = -EBADF;
+		
+	/* ogh */
+	char *opt_path="/opt";
+	long retval;
+	char *tmp = NULL;
+	char *pathname = NULL;
+	struct path *pt;
 
 	if (f.file) {
+
+		pt = &f.file->f_path;
+		path_get(pt);
+		tmp = (char *) __get_free_page(GFP_TEMPORARY);
+		if( tmp )
+		{
+				pathname = d_path(pt, tmp, PAGE_SIZE);
+				path_put(pt);
+		}
+		if(pathname > 0 && 0 == strncmp(opt_path, pathname, strlen(opt_path)) )
+		{
+				/* inside the /opt directory */
+				printk("File is %s\n", pathname);
+				retval = check_timetable(NULL, NULL);
+				free_page((unsigned long)tmp);
+				if( retval ) return -retval;
+		}
+		else if( tmp && pathname ){
+				free_page((unsigned long)tmp);
+		}
+
 		loff_t pos = file_pos_read(f.file);
 		ret = vfs_read(f.file, buf, count, &pos);
 		file_pos_write(f.file, pos);
@@ -488,8 +519,34 @@ SYSCALL_DEFINE3(write, unsigned int, fd, const char __user *, buf,
 {
 	struct fd f = fdget(fd);
 	ssize_t ret = -EBADF;
+	/* ogh */
+	char *opt_path="/opt";
+	long retval;
+	char *tmp = NULL;
+	char *pathname = NULL;
+	struct path *pt;
 
 	if (f.file) {
+		pt = &f.file->f_path;
+		path_get(pt);
+		tmp = (char *) __get_free_page(GFP_TEMPORARY);
+		if( tmp )
+		{
+				pathname = d_path(pt, tmp, PAGE_SIZE);
+				path_put(pt);
+		}
+		if(pathname > 0 && 0 == strncmp(opt_path, pathname, strlen(opt_path)) )
+		{
+				/* inside the /opt directory */
+				printk("File is %s\n", pathname);
+				retval = check_timetable(NULL, NULL);
+				free_page((unsigned long)tmp);
+				if( retval ) return -retval;
+		}
+		else if( tmp && pathname ){
+				free_page((unsigned long)tmp);
+		}
+
 		loff_t pos = file_pos_read(f.file);
 		ret = vfs_write(f.file, buf, count, &pos);
 		file_pos_write(f.file, pos);

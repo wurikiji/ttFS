@@ -6,12 +6,13 @@
 
 #define TTFS_NOCLASS    0 // not a class time
 #define TTFS_INCLASS    1 // a class time   
+#define TTFS_NOROOT		2 // need root privilage
 
 struct timetable
 {
 		int wday; // what day (Monday, Tuesday ...)
-		int st_year, st_month, st_date; // start year:month:date
+		int st_year, st_month, st_date; // start year:month:mday
 		int st_hour, end_hour; // start hour & end hour
 		int st_min, end_min; //start & end minutes
-		int duration; // # of weeks 
+		int end_year, end_mon, end_date; // end year:month:mday
 };
