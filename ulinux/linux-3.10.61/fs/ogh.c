@@ -7,6 +7,7 @@
 #include <linux/kernel.h>
 #include <linux/time.h>
 #include <asm/segment.h>
+#include <linux/time.h>
 #include "../include/linux/ogh.h"
 #include <linux/buffer_head.h>
 
@@ -22,7 +23,8 @@
 
 struct timetable
 {
-	int day; // what day (Monday, Tuesday ...)
+	int wday; // what day (Monday, Tuesday ...)
+	int st_year, st_month, st_date; // start year:month:date
 	int st_hour, end_hour; // start hour & end hour
 	int st_min, end_min; //start & end minutes
 	int duration; // # of weeks 
@@ -43,6 +45,9 @@ int check_timetable(void)
 	int fd, err;
 	struct file* fp;
 	mm_segment_t old_fs;
+	struct tm today;
+	struct timeval time;
+	time_t t;
 
 	old_fs = get_fs();
 	set_fs(get_ds());
@@ -69,6 +74,28 @@ int check_timetable(void)
 			printk("Failed to open file\n");
 	}
 	
+	do_gettimeofday(&time);
+	t = get_seconds();
+	time_to_tm(time.tv_sec, sys_tz.tz_minuteswest * 60 , &today);
+	printk("1 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
+			today.tm_year, today.tm_mon, today.tm_mday,
+			today.tm_hour, today.tm_min, today.tm_sec,
+			today.tm_wday);
+	time_to_tm(t, sys_tz.tz_minuteswest * 60 , &today);
+	printk("2 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
+			today.tm_year, today.tm_mon, today.tm_mday,
+			today.tm_hour, today.tm_min, today.tm_sec,
+			today.tm_wday);
+	time_to_tm(t, 0 , &today);
+	printk("3 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
+			today.tm_year, today.tm_mon, today.tm_mday,
+			today.tm_hour, today.tm_min, today.tm_sec,
+			today.tm_wday);
+	time_to_tm(time.tv_sec, 0, &today);
+	printk("4 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
+			today.tm_year, today.tm_mon, today.tm_mday,
+			today.tm_hour, today.tm_min, today.tm_sec,
+			today.tm_wday);
 	set_fs(old_fs);
 	return 0;
 }
@@ -102,7 +129,7 @@ SYSCALL_DEFINE2(set_timetable, struct timetable*, tt, int, num)
 		copy_from_user((void*)&ttfs[ttfs_index + i], 
 			(const void*)&tt[i], sizeof(struct timetable));
 		printk("Date: %d, Start: %02d-%02d, End: %02d-%02d, %d Weeks\n",
-						tt[i].day, tt[i].st_hour, tt[i].st_min,
+						tt[i].wday, tt[i].st_hour, tt[i].st_min,
 						tt[i].end_hour, tt[i].end_min, tt[i].duration);
 	}
 	/* update # of tt */

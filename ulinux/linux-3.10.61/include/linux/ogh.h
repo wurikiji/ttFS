@@ -9,7 +9,8 @@
 
 struct timetable
 {
-		int day; // what day (Monday, Tuesday ...)
+		int wday; // what day (Monday, Tuesday ...)
+		int st_year, st_month, st_date; // start year:month:date
 		int st_hour, end_hour; // start hour & end hour
 		int st_min, end_min; //start & end minutes
 		int duration; // # of weeks 
