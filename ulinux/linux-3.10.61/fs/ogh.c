@@ -47,7 +47,8 @@ SYSCALL_DEFINE2(set_timetable, struct timetable*, tt, int, num)
 	/* insert into ttfs table */
 	for(i = 0 ;i < num;i++)
 	{
-		memcpy(&ttfs[ttfs_index + i], &tt[i], sizeof(struct timetable));
+		copy_from_user((void*)&ttfs[ttfs_index + i], 
+			(const void*)&tt[i], sizeof(struct timetable));
 		printk("Date: %d, Start: %02d-%02d, End: %02d-%02d, %d Weeks\n",
 						tt[i].day, tt[i].st_hour, tt[i].st_min,
 						tt[i].end_hour, tt[i].end_min, tt[i].duration);
