@@ -1,0 +1,11 @@
+document.write("hello tizen");
+
+function clicked()
+{
+	alert("Thanks");
+}
+
+function func(Name, StartTime, EndTime, Weeks)
+{
+	alert("Name : " + Name.value);
+}

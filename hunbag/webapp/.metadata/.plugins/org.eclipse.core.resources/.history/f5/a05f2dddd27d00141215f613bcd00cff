@@ -1,0 +1,6 @@
+document.write("hello tizen");
+
+function clicked()
+{
+	alert("Thanks");
+}

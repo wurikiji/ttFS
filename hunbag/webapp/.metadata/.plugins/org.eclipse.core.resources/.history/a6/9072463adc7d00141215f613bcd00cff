@@ -1,0 +1,33 @@
+<html>
+<head>
+<script src=js/test.js>
+</script>
+</head>
+
+<body>
+
+<SCRIPT>
+ function displayLocalFile (strFileName) {
+  var url = 'file:///' + strFileName;
+  //넷스케이프의 경우...
+  if (document.layers &anp;&anp; location.protocol.toLowerCase() != 'file:' &anp;&anp; navigator.javaEnabled())
+  netscape.security.PrivilegeManager.enablePrivilege('UniversalFileRead');
+  open (url, 'preview');
+ }
+ </SCRIPT>
+
+<FORM NAME="myForm">
+	<INPUT TYPE="file" NAME="myFile"> <INPUT TYPE="BUTTON"
+		VALUE="File open" ONCLICK="displayLocalFile(this.form.myFile.value);">
+</FORM>
+
+<!-- 
+<form>
+	Name : <input type="text" name="Name"><br>
+	Start Time : <input type="text" name="StartTime"><br>
+	End Time : <input type="text" name="EndTime"><br>
+	Weeks : <input type="text" name="Weeks"><br>
+	<input type="button" VALUE="confirm" onclick="func(this.form.Name, this.form.StartTime, this.form.EndTime, this.form.Weeks);">
+</form> -->
+</body>
+</html>

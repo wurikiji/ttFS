@@ -1,0 +1,15 @@
+document.write("hello tizen");
+
+function clicked()
+{
+	alert("Thanks");
+}
+
+function func(Name, StartTime, EndTime, Weeks)
+{
+	document.write("Time table iinformation\n");
+	document.write("Name : " + Name);
+	document.write("StartTime : " + StartTime);
+	document.write("EndTime : " + EndTime);
+	document.write("Weeks : " + Weeks);
+}

@@ -1,0 +1,22 @@
+function Timetable_structure()
+{
+	var name;
+	var StartTime;
+	var EndTime;
+	var Weeks;
+}
+
+function Timetable_info(name_value, st_value, et_value, weeks_value)
+{
+	var name = name_value;
+	var StartTime = st_value;
+	var EndTime = et_value;
+	var Weeks = weeks_value;
+}
+  
+function func(Name, StartTime, EndTime, Weeks)
+{
+	Timetable_structure = new array(10);
+	
+	Timetable_info(Name.value, StartTime.value, EndTime.value, Weeks.value);
+}

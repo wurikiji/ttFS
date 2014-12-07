@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Time table insertion</title>
+</head>
+<body>
+<!--<script src=js/insertion.js> </script>-->
+<form>
+	Name : <input type="text" name="Name"><br>
+	Start Time : <input type="text" name="StartTime"><br>
+	End Time : <input type="text" name="EndTime"><br>
+	Weeks : <input type="text" name="Weeks"><br>
+	<input type="button" VALUE="confirm" onclick="func(this.form.Name, this.form.StartTime, this.form.EndTime, this.form.Weeks);">
+</form> 
+</body>
+</html>
