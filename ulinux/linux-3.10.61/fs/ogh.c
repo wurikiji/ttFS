@@ -1,7 +1,14 @@
 #include <linux/syscalls.h>
+#include <linux/init.h>
+#include <linux/fcntl.h>
+#include <linux/file.h>
+#include <linux/fs.h>
+#include <asm/uaccess.h>
 #include <linux/kernel.h>
 #include <linux/time.h>
+#include <asm/segment.h>
 #include "../include/linux/ogh.h"
+#include <linux/buffer_head.h>
 
 #if 0
 #define TTFS_MAX_SIZE	32
@@ -30,20 +37,65 @@ SYSCALL_DEFINE0(ogh_test)
 struct timetable ttfs[TTFS_MAX_SIZE];
 int ttfs_index = 0;
 
+#define TTFS_FILE "/etc/ttfs"
 int check_timetable(void)
 {
-		printk("Current time is \n");
-		return 0;
+	int fd, err;
+	struct file* fp;
+	mm_segment_t old_fs;
+
+	old_fs = get_fs();
+	set_fs(get_ds());
+
+	fp = NULL;
+	fp = filp_open(TTFS_FILE, O_RDWR|O_CREAT, 0644);
+	fd = sys_open(TTFS_FILE, O_RDWR|O_CREAT, 0664);
+	
+	if( IS_ERR(fp) )
+	{
+			err = PTR_ERR(fp);
+			printk("Error open using fp %d\n", err);
+	}
+	else {
+			printk("Success open using fp\n");
+			filp_close(fp, NULL);
+	}
+	if( fd >= 0) 
+	{
+			printk("Succefully opened file %s\n", TTFS_FILE);
+			sys_close(fd);
+	}
+	else{
+			printk("Failed to open file\n");
+	}
+	
+	set_fs(old_fs);
+	return 0;
 }
 EXPORT_SYMBOL(check_timetable);
 
 SYSCALL_DEFINE2(set_timetable, struct timetable*, tt, int, num)
 {
 	int i;
+	int fd;
+	mm_segment_t old_fs;
 		/* check conditions */
 	if ( ttfs_index + num > TTFS_MAX_SIZE ) return TTFS_EXCEED;
 	if (!tt) 	return TTFS_NOARGS;
 
+	old_fs = get_fs();
+	set_fs(get_ds());
+	fd = sys_open(TTFS_FILE, O_RDWR|O_CREAT, 0664);
+	
+	if( fd >= 0) 
+	{
+			printk("Succefully opened file %s\n", TTFS_FILE);
+			sys_close(fd);
+	}
+	else{
+			printk("Failed to open file\n");
+	}
+	set_fs(old_fs);
 	/* insert into ttfs table */
 	for(i = 0 ;i < num;i++)
 	{
