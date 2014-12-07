@@ -1,0 +1,13 @@
+<html>
+<head>
+<script src=js/test.js>
+</script>
+</head>
+
+<body>
+<form>
+<input type="text" name="text1">
+<input type="button" VALUE="confirm" onclick="func();">
+</form>
+</body>
+</html>

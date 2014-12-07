@@ -1,0 +1,16 @@
+<html>
+<head>
+<script src=js/test.js>
+</script>
+</head>
+
+<body>
+	<form>
+		Name : <input type="text" name="Name">
+		Start Time : <input type="text" name="StartTime">
+		End Time : <input type="text" name="EndTime">
+		Weeks : <input type="text" name="Weeks">
+		<input type="button" VALUE="confirm" onclick="func(this.form.Name, this.form.StartTime, this.form.EndTime, this.form.Weeks);">
+	</form>
+</body>
+</html>

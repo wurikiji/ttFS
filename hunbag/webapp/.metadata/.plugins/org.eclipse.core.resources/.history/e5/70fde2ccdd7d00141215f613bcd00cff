@@ -1,0 +1,14 @@
+<html>
+<head>
+<script src=js/ttfs.js>
+</script>
+</head>
+
+<body>
+
+<input type="button" VALUE="Timetable insert" onclick="javascript:location.href='insert.html'">
+<input type="button" VALUE="Timetable information" onclick="javascript:location.href='show.html'">
+<input type="button" VALUE="Save" onclick=>
+
+</body>
+</html>

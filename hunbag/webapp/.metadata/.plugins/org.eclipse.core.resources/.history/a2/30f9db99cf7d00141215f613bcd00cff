@@ -1,0 +1,12 @@
+<html>
+<head>
+<script LANGUAGE=javascript src=test.js>
+</script>
+</head>
+
+<body>
+<script language=javascript>
+document.write("output sample")
+</script>
+</body>
+</html>

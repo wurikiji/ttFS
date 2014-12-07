@@ -1,0 +1,11 @@
+function Timetable_info()
+{
+	var name;
+	var StartTime;
+	var EndTime;
+	var Weeks;
+}
+function func(Name, StartTime, EndTime, Weeks)
+{
+	alert("Name : " + Name.value);
+}

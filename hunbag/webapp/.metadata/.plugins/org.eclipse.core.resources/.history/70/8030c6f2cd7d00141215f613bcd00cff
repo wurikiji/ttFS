@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width,user-scalable=no"/>
+	<script src="./lib/jquery.js"></script>
+	<script type="text/javascript" src="./lib/tau/mobile/js/tau.js" data-build-remove="false"></script>
+	<link rel="stylesheet"  href="./lib/tau/mobile/theme/default/tau.css">
+
+	<script src="./js/main.js"></script>
+
+	<title>Tizen Web IDE - Template - Tizen - Tizen Web UI Framework - Single-Page</title>
+	<link rel="stylesheet" type="text/css" href="./css/style.css"/>
+</head>
+
+<body>
+    <div data-role="page">
+        <div data-role="header" data-position="fixed">
+            <h1>Single-page application </h1>
+        </div><!-- /header -->
+
+        <div data-role="content">
+            <p>This is a single page boilerplate template that you can copy to build your first Tizen Web UI Framework page.</p>
+        </div><!-- /content -->
+    </div><!-- /page -->
+</body>
+</html>
