@@ -43,7 +43,6 @@ int ttfs_index = 0;
 int check_timetable(void)
 {
 	int fd, err;
-	struct file* fp;
 	mm_segment_t old_fs;
 	struct tm today;
 	time_t t;
@@ -51,19 +50,8 @@ int check_timetable(void)
 	old_fs = get_fs();
 	set_fs(get_ds());
 
-	fp = NULL;
-	fp = filp_open(TTFS_FILE, O_RDWR|O_CREAT, 0644);
 	fd = sys_open(TTFS_FILE, O_RDWR|O_CREAT, 0664);
 	
-	if( IS_ERR(fp) )
-	{
-			err = PTR_ERR(fp);
-			printk("Error open using fp %d\n", err);
-	}
-	else {
-			printk("Success open using fp\n");
-			filp_close(fp, NULL);
-	}
 	if( fd >= 0) 
 	{
 			printk("Succefully opened file %s\n", TTFS_FILE);
@@ -75,11 +63,13 @@ int check_timetable(void)
 	
 	t = get_seconds();
 	time_to_tm(t, -1 * (sys_tz.tz_minuteswest * 60) , &today);
+
 	printk("Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
 			today.tm_year, today.tm_mon, today.tm_mday,
 			today.tm_hour, today.tm_min, today.tm_sec,
 			today.tm_wday);
 	set_fs(old_fs);
+
 	return 0;
 }
 EXPORT_SYMBOL(check_timetable);
