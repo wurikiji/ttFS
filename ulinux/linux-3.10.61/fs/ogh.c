@@ -46,7 +46,6 @@ int check_timetable(void)
 	struct file* fp;
 	mm_segment_t old_fs;
 	struct tm today;
-	struct timeval time;
 	time_t t;
 
 	old_fs = get_fs();
@@ -74,25 +73,9 @@ int check_timetable(void)
 			printk("Failed to open file\n");
 	}
 	
-	do_gettimeofday(&time);
 	t = get_seconds();
-	time_to_tm(time.tv_sec, sys_tz.tz_minuteswest * 60 , &today);
-	printk("1 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
-			today.tm_year, today.tm_mon, today.tm_mday,
-			today.tm_hour, today.tm_min, today.tm_sec,
-			today.tm_wday);
-	time_to_tm(t, sys_tz.tz_minuteswest * 60 , &today);
-	printk("2 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
-			today.tm_year, today.tm_mon, today.tm_mday,
-			today.tm_hour, today.tm_min, today.tm_sec,
-			today.tm_wday);
-	time_to_tm(t, 0 , &today);
-	printk("3 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
-			today.tm_year, today.tm_mon, today.tm_mday,
-			today.tm_hour, today.tm_min, today.tm_sec,
-			today.tm_wday);
-	time_to_tm(time.tv_sec, 0, &today);
-	printk("4 Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
+	time_to_tm(t, -1 * (sys_tz.tz_minuteswest * 60) , &today);
+	printk("Today is %ld/%02d/%02d-%02d:%02d:%02d (%d)\n", 
 			today.tm_year, today.tm_mon, today.tm_mday,
 			today.tm_hour, today.tm_min, today.tm_sec,
 			today.tm_wday);
