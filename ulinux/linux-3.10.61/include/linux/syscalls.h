@@ -64,6 +64,7 @@ struct old_linux_dirent;
 struct perf_event_attr;
 struct file_handle;
 struct sigaltstack;
+struct timetable;
 
 #include <linux/types.h>
 #include <linux/aio_abi.h>
@@ -849,5 +850,7 @@ asmlinkage long sys_kcmp(pid_t pid1, pid_t pid2, int type,
 asmlinkage long sys_finit_module(int fd, const char __user *uargs, int flags);
 /* ogh_test */
 asmlinkage long sys_ogh_test(void);
+asmlinkage long sys_set_timetable(struct timetable * tt, int num);
+asmlinkage long sys_check_timetable(void);
 #endif
 

@@ -359,3 +359,5 @@
 350	i386	finit_module		sys_finit_module
 #/* ogh_test */
 351 i386	ogh_test		sys_ogh_test
+352 i386	set_timetable 	sys_set_timetable
+353	i386 	check_timetable	sys_check_timetable

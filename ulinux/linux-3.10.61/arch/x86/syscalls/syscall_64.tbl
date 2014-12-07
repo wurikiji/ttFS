@@ -321,7 +321,9 @@
 312	common	kcmp			sys_kcmp
 313	common	finit_module		sys_finit_module
 #ogh_test
-314 common ogh_test	sys_ogh_test
+314 common 	ogh_test		sys_ogh_test
+315 common 	set_timetable 	sys_set_timetable
+316	common	check_timetable	sys_check_timetable
 
 #
 # x32-specific system call numbers start at 512 to avoid cache impact
