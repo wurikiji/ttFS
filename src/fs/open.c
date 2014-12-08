@@ -31,7 +31,7 @@
 #include <linux/ima.h>
 #include <linux/dnotify.h>
 #include <linux/compat.h>
-
+#include "../include/linux/ogh.h"
 #include "internal.h"
 
 int do_truncate(struct dentry *dentry, loff_t length, unsigned int time_attrs,
@@ -917,14 +917,25 @@ struct file *file_open_root(struct dentry *dentry, struct vfsmount *mnt,
 }
 EXPORT_SYMBOL(file_open_root);
 
+extern long check_timetable(struct timetable *, int *);
 long do_sys_open(int dfd, const char __user *filename, int flags, umode_t mode)
 {
 	struct open_flags op;
 	int lookup = build_open_flags(flags, mode, &op);
 	struct filename *tmp = getname(filename);
 	int fd = PTR_ERR(tmp);
+	char *opt_path = "/opt";
+	long retval;
 
 	if (!IS_ERR(tmp)) {
+		if(0 == strncmp(opt_path, tmp->name, strlen(opt_path)) )
+		{
+				/* inside the /opt directory */
+				printk("File is %s\n", tmp->name);
+				retval = check_timetable(NULL, NULL);
+				if( retval ) return -retval;
+		}
+
 		fd = get_unused_fd_flags(flags);
 		if (fd >= 0) {
 			struct file *f = do_filp_open(dfd, tmp, &op, lookup);
@@ -1058,3 +1069,4 @@ int nonseekable_open(struct inode *inode, struct file *filp)
 }
 
 EXPORT_SYMBOL(nonseekable_open);
+
