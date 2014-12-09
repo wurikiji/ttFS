@@ -101,6 +101,9 @@ long check_timetable(struct timetable *tt, int *ret)
 	int i, rcount;
 	long retval = TTFS_NOCLASS;
 
+  if( ttfs_index <= 0 )
+    return 0;
+
 	old_fs = get_fs();
 	set_fs(get_ds());
 
@@ -110,6 +113,7 @@ long check_timetable(struct timetable *tt, int *ret)
 	if( fd < 0 )
 	{
 			printk("Failed to open file: %s, err: %d\n", TTFS_FILE, fd);
+      set_fs(old_fs);
 			return TTFS_NOROOT;
 	}
 	else
@@ -193,6 +197,7 @@ SYSCALL_DEFINE2(set_timetable, struct timetable*, tt, int, num)
 	if(fd < 0) 
 	{
 			printk("Failed to open file\n");
+      set_fs(old_fs);
 			return TTFS_NOROOT;
 	}
 	printk("Succefully opened file %s\n", TTFS_FILE);

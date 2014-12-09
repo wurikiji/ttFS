@@ -6,7 +6,7 @@
 #include <linux/kernel.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
-#include <asm/unistd_64.h>
+#include "../src/arch/arm/include/uapi/asm/unistd.h"
 #include "ogh.h"
 
 

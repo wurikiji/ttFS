@@ -1,0 +1,13 @@
+GCC= arm-linux-gnueabi-gcc-4.5
+CC= arm-linux-gnueabi-gcc-4.5
+
+set=set.o
+show=show.o
+write=write_test.o
+CFLAGS=-I/home/ogh/work/git/ttFS/src/arch/arm/include/ 
+
+
+ALL: $(set) $(show) $(write)
+	$(GCC) -o set.arm $(set) $(CFLAGS)
+	$(GCC) -o show.arm $(show) $(CFLAGS)
+	$(GCC) -o write.arm $(write) $(CFLAGS)

@@ -6,12 +6,12 @@
 #include <linux/kernel.h>
 #include <sys/syscall.h>
 #include <sys/types.h>
-#include <asm/unistd_64.h>
+#include "../src/arch/arm/include/uapi/asm/unistd.h"
 #include "ogh.h"
 
 int main()
 {
-	int ret;
+	int ret = 0;
 	int i;
 	struct timetable tt[TTFS_MAX_SIZE];
 	syscall(__NR_check_timetable, tt, &ret);
